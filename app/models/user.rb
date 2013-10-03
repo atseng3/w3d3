@@ -10,19 +10,18 @@ class User < ActiveRecord::Base
   )
 
   has_many(
-  :visits,
-  :primary_key => :id,
-  :foreign_key => :visitor_id,
-  :class_name => 'Visit'
+    :visits,
+    :primary_key => :id,
+    :foreign_key => :visitor_id,
+    :class_name => 'Visit'
   )
 
   has_many(
-  :taggings,
-  :primary_key => :id,
-  :foreign_key => :tagger_id,
-  :class_name => 'Tagging'
+    :taggings,
+    :primary_key => :id,
+    :foreign_key => :tagger_id,
+    :class_name => 'Tagging'
   )
 
   has_many :visited_urls, :through => :visits, :source => :shortened_url
-  has_many :tags, :through => :tagging, :source => :tag_topic
 end

@@ -1,6 +1,6 @@
 class Shortenedurl < ActiveRecord::Base
   attr_accessible :long_url, :short_url, :submitter_id
-  # attr_reader :long_url
+
   validates :long_url, :short_url, :submitter_id, :presence => true
   validates :short_url, :uniqueness => true
 
@@ -19,10 +19,10 @@ class Shortenedurl < ActiveRecord::Base
   )
 
   has_many(
-  :tags,
-  :primary_key => :id,
-  :foreign_key => :short_url_id,
-  :class_name => 'Tagging'
+    :tags,
+    :primary_key => :id,
+    :foreign_key => :short_url_id,
+    :class_name => 'Tagging'
   )
 
   has_many :visitors, :through => :visits, :source => :user, :uniq => true
@@ -49,17 +49,6 @@ class Shortenedurl < ActiveRecord::Base
   end
 
   def num_recent_uniques
-
     self.visits.where(:created_at => (10.minutes.ago..created_at)).count
   end
-
-  #   count = 0
-  #   self.visits.each do |visit|
-  #     if visit.created_at > 10.minutes.ago
-  #       count += 1
-  #     end
-  #   end
-  #   count
-  # end
-
 end
